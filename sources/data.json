@@ -1,0 +1,141 @@
+[{
+    "id": 1,
+    "start_date": "2021-11-24 01:00",
+    "end_date": "2021-11-24 03:00",
+    "text": "English lesson",
+    "type": "event",
+    "user": "Alex"
+}, {
+    "id": 2,
+    "start_date": "2021-11-25 04:00",
+    "end_date": "2021-11-25 05:00",
+    "text": "Math exam",
+    "type": "task",
+    "user": ["Max", "Bob"]
+}, {
+    "id": 3,
+    "start_date": "2021-11-26 05:00",
+    "end_date": "2021-11-26 07:00",
+    "text": "Spanish lesson",
+    "type": "appointment",
+    "user": "Alex"
+},  {
+    "id": 4,
+    "start_date": "2021-11-26 00:00",
+    "end_date": "2021-11-26 03:00",
+    "text": "Russian lesson",
+    "type": "event",
+    "user": "Max"
+}, {
+    "id": 5,
+    "start_date": "2021-11-27 08:00",
+    "end_date": "2021-11-27 10:00",
+    "text": "Literature lesson",
+    "type": "appointment",
+    "user": "Tom"
+}, {
+    "id": 6,
+    "start_date": "2021-11-27 04:00",
+    "end_date": "2021-11-27 06:00",
+    "text": "Chemistry lesson",
+    "type": "task",
+    "user": "Bob"
+},{
+    "id": 7,
+    "start_date": "2021-11-28 00:00",
+    "end_date": "2021-11-28 01:00",
+    "text": "Usual event",
+    "type": "meeting",
+    "user": ["Alex", "Bob", "Tom"]
+},{
+    "id": 8,
+    "start_date": "2021-11-28 14:00",
+    "end_date": "2021-11-28 20:00",
+    "text": "Usual event",
+    "type": "meeting",
+    "user": ["Alex", "Bob", "Tom"]
+},{
+    "id": 9,
+    "start_date": "2021-11-29 00:00",
+    "end_date": "2021-11-29 05:00",
+    "text": "Usual event",
+    "type": "event",
+    "user": ["Alex", "Bob", "Tom"]
+},{
+    "id": 10,
+    "start_date": "2021-11-29 10:00",
+    "end_date": "2021-11-29 11:00",
+    "text": "Usual event",
+    "type": "meeting",
+    "user": ["Alex", "Bob", "Tom"]
+},{
+    "id": 11,
+    "start_date": "2021-11-30 05:00",
+    "end_date": "2021-11-30 07:00",
+    "text": "Usual event",
+    "type": "meeting",
+    "user": ["Alex", "Bob", "Tom"]
+},{
+    "id": 12,
+    "start_date": "2021-12-01 05:00",
+    "end_date": "2021-12-01 15:00",
+    "text": "Usual event",
+    "type": "appointment",
+    "user": ["Alex", "Bob", "Tom"]
+},{
+    "id": 13,
+    "start_date": "2021-12-02 15:00",
+    "end_date": "2021-12-02 20:00",
+    "text": "Usual event",
+    "type": "event",
+    "user": ["Alex", "Bob", "Tom"]
+},{
+    "id": 14,
+    "start_date": "2021-12-03 05:00",
+    "end_date": "2021-12-03 17:00",
+    "text": "Usual event",
+    "type": "task",
+    "user": ["Alex", "Bob", "Tom"]
+},{
+    "id": 15,
+    "start_date": "2021-12-03 18:00",
+    "end_date": "2021-12-03 23:00",
+    "text": "Usual event",
+    "type": "meeting",
+    "user": ["Alex", "Bob", "Tom"]
+},{
+    "id": 16,
+    "start_date": "2021-12-04 05:00",
+    "end_date": "2021-12-04 07:00",
+    "text": "Usual event",
+    "type": "appointment",
+    "user": ["Alex", "Bob", "Tom"]
+},{
+    "id": 17,
+    "start_date": "2021-12-05 05:00",
+    "end_date": "2021-12-05 17:00",
+    "text": "Usual event",
+    "type": "event",
+    "user": ["Alex", "Bob", "Tom"]
+},{
+    "id": 18,
+    "start_date": "2021-12-06 05:00",
+    "end_date": "2021-12-06 19:00",
+    "text": "Usual event",
+    "type": "task",
+    "user": ["Alex", "Bob", "Tom"]
+},{
+    "id": 19,
+    "start_date": "2021-12-07 05:00",
+    "end_date": "2021-12-07 15:00",
+    "text": "Usual event",
+    "type": "meeting",
+    "user": ["Alex", "Bob", "Tom"]
+},{
+    "id": 20,
+    "start_date": "2021-12-08 05:00",
+    "end_date": "2021-12-08 10:00",
+    "text": "Usual event",
+    "type": "task",
+    "user": ["Alex", "Bob", "Tom"]
+}]
