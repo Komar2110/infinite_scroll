@@ -57,7 +57,6 @@ if (timeline.scrollable) {
         var visiblePortionDuration = screenRightDate - screenLeftDate;
         var loadedTimelineDuration = range.max_date - range.min_date;
 
-
         var scrollThreshold = 0.1; // load new portion when gantt is scrolled to 4/5 of visible range to the right or 1/5 to the left
         if (visiblePortionDuration / loadedTimelineDuration >= 1 - scrollThreshold) {
             return; // if the size of the visible portion is to close to the size of the loaded range for this threshold value which could cause infinite loop - disable infinite scroll
@@ -74,9 +73,10 @@ if (timeline.scrollable) {
             var timelineStart = scheduler.date[timeline.name + "_start"];
             var nextCenterDate;
             if (extendRight) {
-                var nextCenterDate = scheduler.date.add(range.date, scrollAmount, timeline.x_unit);
+                var nextCenterDate = scheduler.date.add(range.date, 1, timeline.x_unit);
+                // debugger
             } else if (extendLeft) {
-                var nextCenterDate = scheduler.date.add(range.date, -scrollAmount, timeline.x_unit);
+                var nextCenterDate = scheduler.date.add(range.date, -1, timeline.x_unit);
             }
             requestAnimationFrame(function () {
                 scheduler.setCurrentView(nextCenterDate);
