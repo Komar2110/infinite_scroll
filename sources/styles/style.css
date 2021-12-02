@@ -36,3 +36,10 @@ body {
 .dhx_cal_tab {
     width: 60px;
 }
+
+.scheduler_custom_scroll {
+    height: 17px;
+    position: absolute;
+    bottom: 20px;
+    overflow-x: auto;
+}

@@ -68,12 +68,12 @@ export class Scheduler {
                 <div class="dhx_cal_date" style="font-size: 14px; left: 190px;"></div>
                 <div class="dhx_cal_tab dhx_cal_tab_first" name="day_tab" style="left:15px;"></div>
                 <div class="dhx_cal_tab" name="week_tab" style="left: 75px;"></div>    
-                <div class="dhx_cal_tab" name="weekdays_tab" style="left:136px; width: 95px;"></div>
-                <div class="dhx_cal_tab dhx_cal_tab_last" name="month_tab" style="left:232px; width: 65px;"></div>
+                <div class="dhx_cal_tab dhx_cal_tab_last" name="month_tab" style="left:136px; width: 65px;"></div>
                 <div class="dhx_cal_tab" name="timeline_tab" style="left:350px; width: 100px;">Timeline</div>
             </div>
             <div class="dhx_cal_header"></div>
             <div class="dhx_cal_data"></div>
+            <div class="scheduler_custom_scroll"></div>
            
             `;
             document.body.appendChild(node);

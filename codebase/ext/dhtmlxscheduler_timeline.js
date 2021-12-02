@@ -157,7 +157,7 @@ Scheduler.plugin(function (e) {
                         var S = s.scrollTop,
                             N = a.scrollHelper.getScrollValue(s),//ScrollValue scrollable data
                             M = a._summ - e.$container.querySelector(".dhx_cal_data").offsetWidth + a.dx + a.custom_scroll_width; //ширина даты
-                        e._timeline_save_scroll_pos(a, S, N, M), //a - timeline, S - scrollTop = 0, N - ScrollValue scrollable data = разные, M = 5552
+                        e._timeline_save_scroll_pos(a, S, N, M), //a - timeline, S - scrollTop = 0, N - ScrollValue scrollable data = разные, M = width total
                         y || a.callEvent("onScroll", [N, S]), 
                         a._is_new_view = !1
                     }
@@ -875,94 +875,91 @@ Scheduler.plugin(function (e) {
                     var L = g[s].sectionKey;
                     e._timeline_finalize_section_add(this, L, t)
                 }
-                // console.log('t',t,'this', this, 'u',u, 'g',g);
                 m && e._timeline_smart_render && (e._timeline_smart_render._rendered_events_cache = []), (m || this.scrollable) && c(t, this, u, g)
-            }, e.second_timeline_y_scale = function (t) {
-                    var a = e._timeline_get_block_stats(t, this),
-                        // n = this.scrollable ? " dhx_timeline_scrollable_data" : "",
-                        // i = "<div class='dhx_timeline_table_wrapper'>",
-                        r = "<div class='dhx_timeline_label_wrapper' style='" + a.style_label_wrapper + "'><div class='dhx_timeline_label_col'>",
-                        // o = "<div class='dhx_timeline_data_wrapper" + n + "' style='" + a.style_data_wrapper + "'><div class='dhx_timeline_data_col'>"
-                        o = "<div class='dhx_timeline_data_col'>";
+            // }, e.second_timeline_y_scale = function (t) {// t = dhx_cal_data
+            //         var a = e._timeline_get_block_stats(t, this),
+            //             // n = this.scrollable ? " dhx_timeline_scrollable_data" : "",
+            //             // i = "<div class='dhx_timeline_table_wrapper'>",
+            //             r = "<div class='dhx_timeline_label_wrapper' style='" + a.style_label_wrapper + "'><div class='dhx_timeline_label_col'>",
+            //             // o = "<div class='dhx_timeline_data_wrapper" + n + "' style='" + a.style_data_wrapper + "'><div class='dhx_timeline_data_col'>"
+            //             o = "<div class='dhx_timeline_data_col'>";
 
-                    e._load_mode && e._load(), e._timeline_smart_render.clearPreparedEventsCache(_);
-                    var _ = e._timeline_smart_render.getPreparedEvents(this);
-                    e._timeline_smart_render.cachePreparedEvents(_);
-                    for (var d = 0, s = 0; s < e._cols.length; s++) d += e._cols[s];
-                    var l = new Date,
-                        h = e._cols.length - e._ignores_detected;//72
-                    l = (e.date.add(l, this.x_step * h, this.x_unit) - l - (this._start_correction + this._end_correction) * h) / d, 
-                    this._step = l, 
-                    this._summ = d;
-                    var u = e._colsS.heights = [],
-                        g = [];
-                    this._events_height = {}, this._section_height = {}, this._label_rows = [];
-                    var v = !1,//false
-                        f = 0,
-                        p = null;
-                    (this.scrollable || this.smart_rendering) && (p = e._timeline_smart_render.getViewPort(this.scrollHelper, this._sch_height)), e._timeline_smart_render._rendered_labels_cache = [], e._timeline_smart_render._rendered_events_cache = [];// p = {x: 0, y: 101, width: 1865, height: 831, top: 101, …
-                    var m, b = !!p; // b = true, m бывает true бывает underfined
-                    m = this.scrollable ? !1 !== this.smart_rendering && !!b : !!this.smart_rendering && b;
-                    for (var x = [], w = 0, k = 0; k < this.y_unit.length; k++) { // x = [], w = 0, k = 0 - сразу, x = (4) [{…}, {…}, {…}, {…}], w = 812, k = 4 - потом
-                        e._timeline_calculate_event_positions.call(this, _[k]);
-                        var D = e._timeline_get_cur_row_stats(this, k);
-                        D = e._timeline_get_fit_events_stats(this, k, D),
-                            x.push(D), w += D.height
-                    }
-                    p && w < p.scrollTop && (p.scrollTop = Math.max(0, w - p.height));
-                    for (var k = 0; k < this.y_unit.length; k++) {
-                        var D = x[k],
-                            E = this.y_unit[k],
-                            S = "<div class='dhx_timeline_label_row " + D.tr_className + "' style='top:" + f + "px;" + D.style_height + D.style_line_height + "'data-row-index='" + k + "' data-row-id='" + y(E.key) + "'><div class='" + D.td_className + "' style='" + D.style_width + " height:" + D.height + "px;' " + e._waiAria.label(D.td_content) + ">" + D.td_content + "</div></div>";
-                        if (m && this._label_rows.push({
-                                div: S,
-                                top: f,
-                                section: E
-                            }), m && (e._timeline_smart_render.isInYViewPort({
-                                top: f,
-                                bottom: f + D.height
-                            }, p) || (v = !0)), f += D.height, v) v = !1;
-                        else {
-                            r += S, m && e._timeline_smart_render._rendered_labels_cache.push(k);
-                            var N = e.templates[this.name + "_row_class"],
-                                M = {
-                                    view: this,
-                                    section: E,
-                                    template: N
-                                },
-                                A = 0;
-                            if ("cell" == this.render) {
-                                o += e._timeline_get_html_for_cell_data_row(k, D, f - D.height, E.key, M);
-                                for (var C = 0; C < e._cols.length; C++) e._ignores[C] && !m ? o += e._timeline_get_html_for_cell_ignores(D) : m && b ? e._timeline_smart_render.isInXViewPort({
-                                    left: A,
-                                    right: A + e._cols[C]
-                                }, p) && (o += e._timeline_get_html_for_cell(C, k, this, _[k][C], D, A)) : o += e._timeline_get_html_for_cell(C, k, this, _[k][C], D, A), A += e._cols[C];
-                                o += "</div>"
-                            } else {
-                                o += e._timeline_get_html_for_bar_matrix_line(k, D, f - D.height, E.key);
-                                var O = _[k];
-                                m && b && (O = e._timeline_smart_render.getVisibleEventsForRow(this, p, _, k));
-                                o += e._timeline_get_events_html.call(this, O), o += e._timeline_get_html_for_bar_data_row(D, M);
-                                for (var C = 0; C < e._cols.length; C++) e._ignores[C] ? o += e._timeline_get_html_for_bar_ignores() : m && b ? e._timeline_smart_render.isInXViewPort({
-                                    left: A,
-                                    right: A + e._cols[C]
-                                }, p) && (o += e._timeline_get_html_for_bar(C, k, this, _[k], A)) : o += e._timeline_get_html_for_bar(C, k, this, _[k], A), A += e._cols[C];
-                                o += "</div>"
-                            }
-                        }
-                        D.sectionKey = E.key, g.push(D)
-                    }
-                    // debugger
-                    // if (i += r + "</div></div>", i += o + "</div></div>", i += "</div>", this._matrix = _, t.innerHTML = i, m) {
-                    //     e.$container.querySelector(".dhx_timeline_data_col").style.height = f + "px"
-                    // }
-                    e._populate_timeline_rendered(t), this._scales = {};
-                    for (var s = 0, T = g.length; s < T; s++) {
-                        u.push(g[s].height);
-                        var L = g[s].sectionKey;
-                        e._timeline_finalize_section_add(this, L, t)
-                    }
-                    m && e._timeline_smart_render && (e._timeline_smart_render._rendered_events_cache = []), (m || this.scrollable) && c(t, this, u, g)
+            //         e._load_mode && e._load(), e._timeline_smart_render.clearPreparedEventsCache(_);
+            //         var _ = e._timeline_smart_render.getPreparedEvents(this);
+            //         e._timeline_smart_render.cachePreparedEvents(_);
+            //         for (var d = 0, s = 0; s < e._cols.length; s++) d += e._cols[s];
+            //         var l = new Date,
+            //             h = e._cols.length - e._ignores_detected;//total number of cells 
+            //         l = (e.date.add(l, this.x_step * h, this.x_unit) - l - (this._start_correction + this._end_correction) * h) / d, this._step = l, this._summ = d;
+            //         var u = e._colsS.heights = [],
+            //             g = [];
+            //         this._events_height = {}, this._section_height = {}, this._label_rows = [];
+            //         var v = !1,
+            //             f = 0,
+            //             p = null;
+            //         (this.scrollable || this.smart_rendering) && (p = e._timeline_smart_render.getViewPort(this.scrollHelper, this._sch_height)), e._timeline_smart_render._rendered_labels_cache = [], e._timeline_smart_render._rendered_events_cache = [];// p = {x: 0, y: 101, width: 1865, height: 831, top: 101, …
+            //         var m, b = !!p; // b = true, m true or underfined
+            //         m = this.scrollable ? !1 !== this.smart_rendering && !!b : !!this.smart_rendering && b;
+            //         for (var x = [], w = 0, k = 0; k < this.y_unit.length; k++) {
+            //             e._timeline_calculate_event_positions.call(this, _[k]);
+            //             var D = e._timeline_get_cur_row_stats(this, k);
+            //             D = e._timeline_get_fit_events_stats(this, k, D),
+            //                 x.push(D), w += D.height
+            //         }
+            //         p && w < p.scrollTop && (p.scrollTop = Math.max(0, w - p.height));
+            //         for (var k = 0; k < this.y_unit.length; k++) {
+            //             var D = x[k],
+            //                 E = this.y_unit[k],
+            //                 S = "<div class='dhx_timeline_label_row " + D.tr_className + "' style='top:" + f + "px;" + D.style_height + D.style_line_height + "'data-row-index='" + k + "' data-row-id='" + y(E.key) + "'><div class='" + D.td_className + "' style='" + D.style_width + " height:" + D.height + "px;' " + e._waiAria.label(D.td_content) + ">" + D.td_content + "</div></div>";
+            //             if (m && this._label_rows.push({
+            //                     div: S,
+            //                     top: f,
+            //                     section: E
+            //                 }), m && (e._timeline_smart_render.isInYViewPort({
+            //                     top: f,
+            //                     bottom: f + D.height
+            //                 }, p) || (v = !0)), f += D.height, v) v = !1;
+            //             else {
+            //                 r += S, m && e._timeline_smart_render._rendered_labels_cache.push(k);
+            //                 var N = e.templates[this.name + "_row_class"],
+            //                     M = {
+            //                         view: this,
+            //                         section: E,
+            //                         template: N
+            //                     },
+            //                     A = 0;
+            //                 if ("cell" == this.render) {
+            //                     o += e._timeline_get_html_for_cell_data_row(k, D, f - D.height, E.key, M);
+            //                     for (var C = 0; C < e._cols.length; C++) e._ignores[C] && !m ? o += e._timeline_get_html_for_cell_ignores(D) : m && b ? e._timeline_smart_render.isInXViewPort({
+            //                         left: A,
+            //                         right: A + e._cols[C]
+            //                     }, p) && (o += e._timeline_get_html_for_cell(C, k, this, _[k][C], D, A)) : o += e._timeline_get_html_for_cell(C, k, this, _[k][C], D, A), A += e._cols[C];
+            //                     o += "</div>"
+            //                 } else {
+            //                     o += e._timeline_get_html_for_bar_matrix_line(k, D, f - D.height, E.key);
+            //                     var O = _[k];
+            //                     m && b && (O = e._timeline_smart_render.getVisibleEventsForRow(this, p, _, k));
+            //                     o += e._timeline_get_events_html.call(this, O), o += e._timeline_get_html_for_bar_data_row(D, M);
+            //                     for (var C = 0; C < e._cols.length; C++) e._ignores[C] ? o += e._timeline_get_html_for_bar_ignores() : m && b ? e._timeline_smart_render.isInXViewPort({
+            //                         left: A,
+            //                         right: A + e._cols[C]
+            //                     }, p) && (o += e._timeline_get_html_for_bar(C, k, this, _[k], A)) : o += e._timeline_get_html_for_bar(C, k, this, _[k], A), A += e._cols[C];
+            //                     o += "</div>"
+            //                 }
+            //             }
+            //             D.sectionKey = E.key, g.push(D)
+            //         }
+            //         // debugger
+            //         // if (i += r + "</div></div>", i += o + "</div></div>", i += "</div>", this._matrix = _, t.innerHTML = i, m) {
+            //         //     e.$container.querySelector(".dhx_timeline_data_col").style.height = f + "px"
+            //         // }
+            //         e._populate_timeline_rendered(t), this._scales = {};
+            //         for (var s = 0, T = g.length; s < T; s++) {
+            //             u.push(g[s].height);
+            //             var L = g[s].sectionKey;
+            //             e._timeline_finalize_section_add(this, L, t)
+            //         }
+            //         m && e._timeline_smart_render && (e._timeline_smart_render._rendered_events_cache = []), (m || this.scrollable) && c(t, this, u, g)
             }, e._timeline_finalize_section_add = function (t, a, n) {
                 var i = t._scales[a] = n.querySelector(".dhx_timeline_data_col [data-section-id='" + b(a) + "']");
                 i && e.callEvent("onScaleAdd", [i, a])
@@ -1081,16 +1078,16 @@ Scheduler.plugin(function (e) {
                             i = e._timeline_smart_render.getVisibleHeader(this, n);
                         i && (this.second_scale ? e._els.dhx_cal_header[0].children[1].innerHTML = i : e._els.dhx_cal_header[0].children[0].innerHTML = i)
                     }
-                    let scrollable_elem = document.querySelector('.dhx_timeline_scrollable_data');
-                    if (scrollable_elem == null) {
+                    // let scrollable_elem = document.querySelector('.dhx_timeline_scrollable_data');
+                    // if (scrollable_elem == null) {
                         e.timeline_y_scale.call(this, e._els.dhx_cal_data[0]), e._min_date = a;
                         var r = e._getNavDateElement();
                         r && (r.innerHTML = e.templates[this.name + "_date"](e._min_date, e._max_date)), e._mark_now && e._mark_now(), e._timeline_reset_scale_height.call(this, t)
-                    } else {
-                        e.second_timeline_y_scale.call(this, e._els.dhx_cal_data[0]), e._min_date = a;
-                        var r = e._getNavDateElement();
-                        r && (r.innerHTML = e.templates[this.name + "_date"](e._min_date, e._max_date)), e._mark_now && e._mark_now(), e._timeline_reset_scale_height.call(this, t)
-                    }
+                    // } else {
+                    //     e.second_timeline_y_scale.call(this, e._els.dhx_cal_data[0]), e._min_date = a;
+                    //     var r = e._getNavDateElement();
+                    //     r && (r.innerHTML = e.templates[this.name + "_date"](e._min_date, e._max_date)), e._mark_now && e._mark_now(), e._timeline_reset_scale_height.call(this, t)
+                    // }
                 }
                 e._timeline_render_scale_header(this, t), e._timeline_hideToolTip()
             }, e._timeline_hideToolTip = function () {
