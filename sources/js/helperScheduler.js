@@ -73,7 +73,7 @@ export class Scheduler {
             </div>
             <div class="dhx_cal_header"></div>
             <div class="dhx_cal_data"></div>
-            <div class="scheduler_custom_scroll"></div>
+            <div class="custom_scroll"></div>
            
             `;
             document.body.appendChild(node);

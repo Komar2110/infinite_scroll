@@ -101,7 +101,7 @@ Scheduler.plugin(function (e) {
             var _ = d(t, a),
                 c = e._els.dhx_cal_header[0],
                 h = s(t);
-            if (h && (h.addEventListener ? "onwheel" in document ? h.addEventListener("wheel", r) : "onmousewheel" in document && h.addEventListener("mousewheel", r) : h.attachEvent("onmousewheel", r),
+            if (h && (h.addEventListener ? "onwheel" in document ? h.addEventListener("wheel", r,{passive: true}) : "onmousewheel" in document && h.addEventListener("mousewheel", r,{passive: true}) : h.attachEvent("onmousewheel", r,{passive: true}),
                     !h.$eventsAttached)) {
                 h.$eventsAttached = !0;
                 var u = {
@@ -114,7 +114,7 @@ Scheduler.plugin(function (e) {
                         pageX: t.pageX,
                         pageY: t.pageY
                     }
-                }), h.addEventListener("touchmove", function (e) {
+                },{passive: true}), h.addEventListener("touchmove", function (e) {
                     var t = e;
                     e.touches && (t = e.touches[0]);
                     var a = u.pageY - t.pageY;
@@ -122,7 +122,7 @@ Scheduler.plugin(function (e) {
                         pageX: t.pageX,
                         pageY: t.pageY
                     }, a && (_.scrollTop += a), e && e.preventDefault && e.preventDefault()
-                })
+                },{passive: true})
             }
             var g;
             if (_.onscroll = function (r) {
@@ -173,7 +173,7 @@ Scheduler.plugin(function (e) {
                         pageX: t.pageX,
                         pageY: t.pageY
                     }
-                }), _.addEventListener("touchmove", function (t) {
+                },{passive: true}), _.addEventListener("touchmove", function (t) {
                     var n = t;
                     t.touches && (n = t.touches[0]);
                     var i = l(),
@@ -191,7 +191,7 @@ Scheduler.plugin(function (e) {
                         h < .42 ? r = 0 : u < .42 && (o = 0), a.scrollHelper.setScrollValue(_, a.scrollHelper.getScrollValue(_) + r), _.scrollTop += o, a.scrollable && o && (i.style.top = -_.scrollTop + "px")
                     }
                     return t && t.preventDefault && t.preventDefault(), !1
-                })
+                },{passive: true})
             }
             a.scroll_position && a._is_new_view ? a.scrollTo(a.scroll_position) : e._timeline_set_scroll_pos(t, a),///////// scrollTo
                 a._is_ev_creating = !0

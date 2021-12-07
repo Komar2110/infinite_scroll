@@ -37,9 +37,19 @@ body {
     width: 60px;
 }
 
-.scheduler_custom_scroll {
-    height: 17px;
+.custom_scroll {
     position: absolute;
     bottom: 20px;
     overflow-x: auto;
+    border: 1px solid red;
 }
+
+/* .custom_scroll {
+    position: absolute;
+    bottom: 20px;
+    overflow-x:scroll
+} */
+
+/* .dhx_timeline_scrollable_data {
+    overflow-x: hidden !important;
+} */

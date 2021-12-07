@@ -8,7 +8,7 @@ scheduler.locale.labels.section_custom = "Section";
 
 var sections = [];
 
-for (var i = 1; i < 200; i++) {
+for (var i = 1; i < 44; i++) {
     sections.push({
         key: i,
         label: "section " + i
@@ -42,36 +42,54 @@ timeline.dateFromPos = function (x) { // TODO: add API method
 let startDate = new Date(),
     endDate = scheduler.date.add(startDate, days, 'day');
 
-scheduler.attachEvent("onEventAdded", function (id, ev) {
-    scheduler.setCurrentView();
+// scheduler.attachEvent("onEventAdded", function (id, ev) {
+//     scheduler.setCurrentView();
+// });
 
+scheduler.attachEvent("onAfterSchedulerResize", function(){
+    scheduler.setCurrentView();
 });
 
+let startPos;
+scheduler.attachEvent("onBeforeViewChange", function (old_mode, old_date, mode, date) {
+    if (old_mode != mode && mode == timeline.name) {
+        let widthCalData = document.querySelector(".dhx_cal_data").offsetWidth;
+        startPos = (timeline.x_size * timeline.column_width - widthCalData) / days * 0.8;
+    }
+    if (mode != timeline.name) {
+        let customScroll = document.querySelector(".custom_scroll");
+        customScroll.style.overflowX = "hidden";
+    }
+    return true;
+});
+
+let check = false;
+
 scheduler.attachEvent("onViewChange", function (new_mode, new_date) {
-    console.log("onViewChange");
-    if (new_mode == timeline.name) {
-        if (timeline.scrollable) {
+    if (timeline.scrollable && new_mode == timeline.name) {
 
-            let widthCalHeader = Number(getComputedStyle(document.querySelector('.dhx_cal_header')).width.replace('px', ''));
-            let scrollableData = document.querySelector(".dhx_timeline_scrollable_data");
-            // scrollableData.style.overflowX = "hidden";
+        let widthCalHeader = Number(getComputedStyle(document.querySelector('.dhx_cal_header')).width.replace('px', ''));
+        let scrollableData = document.querySelector(".dhx_timeline_scrollable_data");
+        // scrollableData.style.overflowX = "hidden";
 
-            let customScroll = document.querySelector(".scheduler_custom_scroll");
-            customScroll.style.width = scrollableData.offsetWidth + "px";
-            customScroll.style.overflowX = "auto";
-            let cscroll = `<div style="width: ${widthCalHeader}px; height: 1px;"></div>`;
-            customScroll.innerHTML = cscroll;
+        let customScroll = document.querySelector(".custom_scroll");
+        customScroll.style.width = scrollableData.clientWidth + "px";
+        customScroll.style.overflowX = "auto";
+        let cscroll = `<div style="width: ${widthCalHeader}px; height: 1px;"></div>`;
+        customScroll.innerHTML = cscroll;
 
+        if (!check) {
+            check = true;
             customScroll.addEventListener("scroll", () => {
-
-                console.log('new scroll', customScroll.scrollLeft);
+                let scrollableData = document.querySelector(".dhx_timeline_scrollable_data");
+                console.log('scroll', customScroll.scrollLeft);
                 timeline.scrollTo(customScroll.scrollLeft);
-
-                if (customScroll.scrollLeft + scrollableData.clientWidth >= widthCalHeader) {
-                    let scrollPos = timeline.getScrollPosition();
-                    customScroll.scrollTo(customScroll.scrollLeft - 100, scrollPos.top); // высчитать y
+                    
+                if (customScroll.scrollLeft + scrollableData.offsetWidth >= widthCalHeader) {
+                    customScroll.scrollTo(customScroll.scrollLeft - 100, 0); // высчитать y
                     updateCalData(1, customScroll.scrollLeft);
-                } if (customScroll.scrollLeft == 0) {
+                }
+                if (customScroll.scrollLeft == 0) {
                     customScroll.scrollTo(100, 0); // высчитать y
                     updateCalData(-1, customScroll.scrollLeft);
                 }
@@ -90,6 +108,7 @@ function updateCalData(i, left) {
     timeline.setRange(startDate, endDate);
     let scrollPos = timeline.getScrollPosition();
     timeline.scrollTo(left, scrollPos.top);
+    console.log('ready');
 }
 
 scheduler.date.hour_start = function (date) {
